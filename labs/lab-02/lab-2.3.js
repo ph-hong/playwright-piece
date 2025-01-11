@@ -9,58 +9,57 @@
 
 const readline = require(`readline-sync`);
 
-let weight = Number(readline.question('Your weight (kg): '));
-let height = Number(readline.question('Your height (m): '));
-let bmi = (weight / (height ** 2)).toFixed(1);
-console.log(`BMI: ${bmi}`);
+let weight = Number(readline.question('Enter your weight (kg): '));
+let height = Number(readline.question('Enter your height (m): '));
+const BMI = (weight / (height ** 2)).toFixed(1);
+console.log(`BMI: ${BMI}`);
 
-let isNormalRange = bmi >= 18.5 && bmi <= 24.9;
-let isOverweightRange = bmi >= 25 && bmi <= 29.9;
-let isStateEligible = true;
+let isUnderW = false;
+let isOverW = false;
 
-if (bmi < 18.5) {
-    let normalBMIMin = (18.5 - bmi).toFixed(1);
-    let normalBMIMax = (24.9 - bmi).toFixed(1);
-    let gainWeightSuggestionMin = Number((normalBMIMin * (height ** 2)).toFixed(1));
-    let gainWeightSuggestionMax = Number((normalBMIMax * (height ** 2)).toFixed(1));
-    let weightSuggestionMin = weight + gainWeightSuggestionMin;
-    let weightSuggestionMax = weight + gainWeightSuggestionMax;
+if (BMI < 18.5) {
+    isUnderW = true;
+    console.log(`\t--> Underweight`)
 
-    console.log(`Underweight! you should gain in range ${gainWeightSuggestionMin} ~ ${gainWeightSuggestionMax} (kg).
-        Healthy weight suggestion: ${weightSuggestionMin} up to ${weightSuggestionMax} (kg)`);
-
-} else if (isNormalRange == isStateEligible) {
+} else if (BMI <= 24.9) {
     console.log("You're healthy!! 💯")
 
-} else if (isOverweightRange == isStateEligible) {
-    let normalBMIMin = (bmi - 24.9).toFixed(1);
-    let normalBMIMax = (bmi - 18.5).toFixed(1);
-    let loseWeightSuggestionMin = Number((normalBMIMin * (height ** 2)).toFixed(1));
-    let loseWeightSuggestionMax = Number((normalBMIMax * (height ** 2)).toFixed(1));
-    let weightSuggestionMin = weight - loseWeightSuggestionMin;
-    let weightSuggestionMax = weight - loseWeightSuggestionMax;
-
-    console.log(`Overweight! you should lose in range ${loseWeightSuggestionMin} ~ ${loseWeightSuggestionMax} (kg).
-        Healthy weight suggestion: ${weightSuggestionMax} ~ ${weightSuggestionMin} (kg)`);
+} else if (BMI <= 29.9) {
+    isOverW = true;
+    console.log(`\t--> Overweight`)
 
 } else {
-    let overweightBMIMin = (bmi - 29.9).toFixed(1);
-    let overweightBMIMax = (bmi - 25).toFixed(1);
-    let loseOverweightSuggestionMin = Number((overweightBMIMin * (height ** 2)).toFixed(1));
-    let loseOverweightSuggestionMax = Number((overweightBMIMax * (height ** 2)).toFixed(1));
-    let overweightSuggestionMin = weight - loseOverweightSuggestionMin;
-    let overweightSuggestionMax = weight - loseOverweightSuggestionMax;
+    isOverW = true;
+    console.log(`\t--> Obesity`)
+}
 
-    console.log(`Obesity! 👉 Option 1 - Light Healthy: you should lose in range ${loseOverweightSuggestionMin} ~ ${loseOverweightSuggestionMax} (kg).
-        Weight suggestion: ${overweightSuggestionMax} ~  ${overweightSuggestionMin} (kg)`);
+// Handle for weight suggestion if any
+if (isUnderW) {
+    let suggestW = (18.5 * (height ** 2)).toFixed(3);
+    let increaseW = suggestW - weight;
+    let normalBMIMin = (18.5 - BMI).toFixed(1);
+    let normalBMIMax = (24.9 - BMI).toFixed(1);
+    let gainWMin = Number((normalBMIMin * (height ** 2)).toFixed(1));
+    let gainWMax = Number((normalBMIMax * (height ** 2)).toFixed(1));
+    let suggestWMin = weight + gainWMin;
+    let suggestWMax = weight + gainWMax;
+    console.log(`\t --> You should gain in range ${gainWMin} ~ ${gainWMax} (kg).
+    \t --> Healthy weight suggestion: ${suggestWMin} up to ${suggestWMax} (kg)
+    \t --> You should increase min: ${increaseW} (kg)`);
+}
 
-    let normalBMIMin = (bmi - 24.9).toFixed(1);
-    let normalBMIMax = (bmi - 18.5).toFixed(1);
-    let loseWeightSuggestionMin = Number((normalBMIMin * (height ** 2)).toFixed(1));
-    let loseWeightSuggestionMax = Number((normalBMIMax * (height ** 2)).toFixed(1));
-    let weightSuggestionMin = weight - loseWeightSuggestionMin;
-    let weightSuggestionMax = weight - loseWeightSuggestionMax;
+if (isOverW) {
+    let suggestW = (24.9 * (height ** 2)).toFixed(3);
+    let decreaseW = weight - suggestW;
+    let normalBMIMin = (BMI - 24.9).toFixed(1);
+    let normalBMIMax = (BMI - 18.5).toFixed(1);
+    let loseWMin = Number((normalBMIMin * (height ** 2)).toFixed(1));
+    let loseWMax = Number((normalBMIMax * (height ** 2)).toFixed(1));
+    let suggestWMin = weight - loseWMin;
+    let suggestWMax = weight - loseWMax;
 
-    console.log(`Obesity! 💥 Option 2 - Fit Body: You should lose in range ${loseWeightSuggestionMin} ~ ${loseWeightSuggestionMax} (kg).
-        Healthy weight suggestion: ${weightSuggestionMax} ~ ${weightSuggestionMin} (kg)`);
+    console.log(`\t --> You should lose in range ${loseWMin} ~ ${loseWMax} (kg).
+    \t --> Healthy weight suggestion: ${suggestWMax} ~ ${suggestWMin} (kg)
+    \t --> You should decrease min: ${decreaseW} (kg)`);
+
 }

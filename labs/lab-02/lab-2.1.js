@@ -10,22 +10,18 @@ const readline = require(`readline-sync`);
 
 let weight = Number(readline.question('Enter your weight (kg): '));
 let height = Number(readline.question('Enter your height (m): '));
-let bmi = (weight / (height ** 2)).toFixed(1);
-console.log(`BMI: ${bmi}`);
+const BMI = (weight / (height ** 2)).toFixed(1);
+console.log(`BMI: ${BMI}`);
 
-let isNormalRange = bmi >= 18.5 && bmi <= 24.9;
-let isOverweightRange = bmi >= 25 && bmi <= 29.9;
-let isStateEligible = true;
+if (BMI < 18.5) {
+    console.log(`\t --> Underweight`);
 
-if (bmi < 18.5) {
-    console.log("You're underweight");
+} else if (BMI <=24.9) {
+    console.log(`\t --> Normal weight`)
 
-} else if (isNormalRange == isStateEligible) {
-    console.log("You're healthy")
-
-} else if (isOverweightRange == isStateEligible) {
-    console.log("You're overweight")
+} else if (BMI <= 29.9) {
+    console.log(`\t --> Overweight`)
 
 } else {
-    console.log("You're obesity")
+    console.log(`\t --> Obesity`)
 }
