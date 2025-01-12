@@ -14,8 +14,16 @@ let clientAge = Number(readline.question('Your age: '));
 
 if (clientAge < 18) {
     console.log("Not sell");
+    if(clientAge < 14){
+        console.log("Call 911")
+    }
 } else if (clientAge <= 55)
     console.log("Unlimitted");
 else {
     console.log("2 bottles")
 }
+
+
+/** Day 3
+ * 
+ */
