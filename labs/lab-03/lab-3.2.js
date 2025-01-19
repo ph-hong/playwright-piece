@@ -9,14 +9,16 @@ let intArr = [1, 2, 3, 4, 5];
 
 let min = intArr[0];
 let max = intArr[0];
+let arrLength = intArr.length;
 
-for (let index = 0; index < intArr.length; index++) {
-    if (intArr[index] > max) {
-        max = intArr[index];
+for (let index = 0; index < arrLength; index++) {
+    const value = intArr[index];
+    if (value > max) {
+        max = value;
     };
-    if (intArr[index] < min) {
-        min = intArr[index]
+    if (value < min) {
+        min = value
     }
 }
 
-console.log(`Min number: ${min} \n Max number: ${max}`)
+console.log(`Min number: ${min} \nMax number: ${max}`)
