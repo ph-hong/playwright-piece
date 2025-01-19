@@ -4,12 +4,17 @@ let intArr = [1, 2, 3, 4, 5];
 Even numders: 2
 Odd numbers: 3
  */
+
+const { isEvenNumber } = require('../utils/ArrayHandle.js');
+
 let intArr = [1, 2, 3, 4, 5];
 let evenNum = 0;
 let oddNum = 0;
+let arrLength = intArr.length;
 
-for (let index = 0; index < intArr.length; index++) {
-    if (intArr[index] % 2 === 0) {
+for (let index = 0; index < arrLength; index++) {
+    const number = intArr[index];
+    if (isEvenNumber(number)) {
         evenNum++;
     } else {
         oddNum++;
