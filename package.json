@@ -1,2 +1,14 @@
-{"dependencies":{"readline-sync":"^1.4.10"}}
-
+{
+    "dependencies": {
+        "readline-sync": "^1.4.10"
+    },
+    "devDependencies": {
+        "nodemon": "^3.1.9",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.8.2"
+    },
+    "scripts": {
+        "compile": "tsc",
+        "start": "nodemon "
+    }
+}
