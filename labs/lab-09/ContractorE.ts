@@ -1,6 +1,6 @@
 import Employee from './Employee';
 
-export default class Contructor extends Employee {
+export default class Contractor extends Employee {
     constructor(name: string, salary: number) {
         super(name, salary)
     }

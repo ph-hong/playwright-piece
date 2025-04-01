@@ -16,14 +16,14 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var Employee_1 = require("./Employee");
-var Contructor = /** @class */ (function (_super) {
-    __extends(Contructor, _super);
-    function Contructor(name, salary) {
+var Contractor = /** @class */ (function (_super) {
+    __extends(Contractor, _super);
+    function Contractor(name, salary) {
         return _super.call(this, name, salary) || this;
     }
-    Contructor.prototype.printSalary = function () {
+    Contractor.prototype.printSalary = function () {
         console.log("Salary: ".concat(this.salary));
     };
-    return Contructor;
+    return Contractor;
 }(Employee_1.default));
-exports.default = Contructor;
+exports.default = Contractor;
